@@ -1,0 +1,85 @@
+{
+  "Everforest": {
+    "bg": "#2d353b",
+    "fg": "#d3c6aa",
+    "link": "#7fbbb3",
+    "user_bubble_bg": "#343f44",
+    "system_text": "#9da9a0",
+    "code_bg": "#272e33",
+    "table_border": "#414b50",
+    "table_header_bg": "#343f44",
+    "blockquote_border": "#a7c080",
+    "scrollbar_track": "#2d353b",
+    "scrollbar_thumb": "#414b50",
+    "scrollbar_thumb_hover": "#5c6a72",
+
+    "qt_bg": "#2d353b",
+    "qt_fg": "#d3c6aa",
+    "qt_accent": "#a7c080",
+    "qt_accent_hover": "#b0d084",
+    "qt_accent_disabled": "#4b565c",
+    "qt_border": "#414b50",
+
+    "qt_sidebar_bg": "#272e33",
+    "qt_sidebar_selected_bg": "#3f5b4f",
+    "qt_splitter_bg": "#343f44",
+    "qt_input_bg": "#272e33",
+
+    "qt_button_bg": "#272e33",
+    "qt_button_hover_bg": "#3c474d",
+    "qt_button_pressed_bg": "#4c555b",
+    "qt_button_disabled_bg": "#232a2f",
+    "qt_button_disabled_fg": "#7a8478",
+
+    "qt_search_toggle_on_bg": "#a7c080",
+    "qt_search_toggle_on_hover_bg": "#b0d084",
+
+    "qt_checkbox_bg": "#272e33",
+    "qt_checkbox_checked_bg": "#a7c080",
+
+    "qt_scrollbar_bg": "#2d353b",
+    "qt_scrollbar_handle_bg": "#414b50"
+  },
+  "Gruvbox": {
+    "bg": "#282828",
+    "fg": "#ebdbb2",
+    "link": "#83a598",
+    "user_bubble_bg": "#3c3836",
+    "system_text": "#a89984",
+    "code_bg": "#1d2021",
+    "table_border": "#504945",
+    "table_header_bg": "#3c3836",
+    "blockquote_border": "#fabd2f",
+    "scrollbar_track": "#282828",
+    "scrollbar_thumb": "#504945",
+    "scrollbar_thumb_hover": "#665c54",
+
+    "qt_bg": "#282828",
+    "qt_fg": "#ebdbb2",
+    "qt_accent": "#d79921",
+    "qt_accent_hover": "#fabd2f",
+    "qt_accent_disabled": "#665c54",
+    "qt_border": "#504945",
+
+    "qt_sidebar_bg": "#1d2021",
+    "qt_sidebar_selected_bg": "#504945",
+    "qt_splitter_bg": "#3c3836",
+    "qt_input_bg": "#1d2021",
+
+    "qt_button_bg": "#3c3836",
+    "qt_button_hover_bg": "#504945",
+    "qt_button_pressed_bg": "#665c54",
+    "qt_button_disabled_bg": "#1d2021",
+    "qt_button_disabled_fg": "#928374",
+
+    "qt_search_toggle_on_bg": "#d79921",
+    "qt_search_toggle_on_hover_bg": "#fabd2f",
+
+    "qt_checkbox_bg": "#1d2021",
+    "qt_checkbox_checked_bg": "#b8bb26",
+
+    "qt_scrollbar_bg": "#282828",
+    "qt_scrollbar_handle_bg": "#504945"
+  }
+
+}

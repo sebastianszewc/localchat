@@ -1,0 +1,130 @@
+/* Global default */
+* {
+    color: {{QT_FG}};
+    background-color: {{QT_BG}};
+    selection-background-color: {{QT_ACCENT}};
+    selection-color: {{QT_FG}};
+    border: none;
+}
+
+/* Main window and generic widgets */
+QMainWindow, QWidget {
+    background-color: {{QT_BG}};
+}
+
+/* Sidebar list */
+QListWidget {
+    background-color: {{QT_SIDEBAR_BG}};
+    padding: 4px;
+    outline: none;
+}
+
+QListWidget::item {
+    padding: 6px 8px;
+}
+
+QListWidget::item:selected {
+    background-color: {{QT_SIDEBAR_SELECTED_BG}};
+    color: {{QT_FG}};
+}
+
+/* Splitters */
+QSplitter::handle {
+    background-color: {{QT_SPLITTER_BG}};
+}
+
+/* Text inputs */
+QPlainTextEdit {
+    background-color: {{QT_INPUT_BG}};
+    border-radius: 4px;
+    padding: 6px;
+}
+
+/* Combo box (model selector) */
+QComboBox {
+    background-color: {{QT_INPUT_BG}};
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+QComboBox::drop-down {
+    width: 0px;
+    border: none;
+}
+
+/* Generic push buttons */
+QPushButton {
+    background-color: {{QT_BUTTON_BG}};
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: none;
+}
+
+QPushButton:hover {
+    background-color: {{QT_BUTTON_HOVER_BG}};
+}
+
+QPushButton:pressed {
+    background-color: {{QT_BUTTON_PRESSED_BG}};
+}
+
+QPushButton:disabled {
+    background-color: {{QT_BUTTON_DISABLED_BG}};
+    color: {{QT_BUTTON_DISABLED_FG}};
+}
+
+/* Search toggle specific */
+QPushButton#searchToggle {
+    background-color: {{QT_BUTTON_BG}};
+}
+
+QPushButton#searchToggle:checked {
+    background-color: {{QT_SEARCH_TOGGLE_ON_BG}};
+    color: {{QT_FG}};
+}
+
+QPushButton#searchToggle:checked:hover {
+    background-color: {{QT_SEARCH_TOGGLE_ON_HOVER_BG}};
+}
+
+/* Default checkbox next to model combo */
+QCheckBox {
+    spacing: 4px;
+}
+
+QCheckBox::indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    background-color: {{QT_CHECKBOX_BG}};
+}
+
+QCheckBox::indicator:checked {
+    background-color: {{QT_CHECKBOX_CHECKED_BG}};
+}
+
+/* Scrollbars */
+QScrollBar:vertical,
+QScrollBar:horizontal {
+    background: {{QT_SCROLLBAR_BG}};
+    border: none;
+    margin: 0px;
+}
+
+QScrollBar::handle:vertical,
+QScrollBar::handle:horizontal {
+    background: {{QT_SCROLLBAR_HANDLE_BG}};
+    border-radius: 5px;
+    min-height: 20px;
+    min-width: 20px;
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical,
+QScrollBar::add-line:horizontal,
+QScrollBar::sub-line:horizontal {
+    width: 0px;
+    height: 0px;
+    border: none;
+    background: transparent;
+}

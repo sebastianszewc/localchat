@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Chat</title>
+
+  <!-- Optional: MathJax for LaTeX ($...$, $$...$$) -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)'], ['\[', '\]'] ], 
+        displayMath: [['$$', '$$'] , ['\\[', '\\]'], ['\[', '\]']  ],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script
+    id="MathJax-script"
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+  <style>
+    :root {
+      --color-bg: {{COLOR_BG}};
+      --color-fg: {{COLOR_FG}};
+      --color-link: {{COLOR_LINK}};
+      --color-user-bubble-bg: {{COLOR_USER_BUBBLE_BG}};
+      --color-system-text: {{COLOR_SYSTEM_TEXT}};
+      --color-code-bg: {{COLOR_CODE_BG}};
+      --color-table-border: {{COLOR_TABLE_BORDER}};
+      --color-table-header-bg: {{COLOR_TABLE_HEADER_BG}};
+      --color-blockquote-border: {{COLOR_BLOCKQUOTE_BORDER}};
+      --color-scrollbar-track: {{COLOR_SCROLLBAR_TRACK}};
+      --color-scrollbar-thumb: {{COLOR_SCROLLBAR_THUMB}};
+      --color-scrollbar-thumb-hover: {{COLOR_SCROLLBAR_THUMB_HOVER}};
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background-color: var(--color-bg);
+      color: var(--color-fg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--color-link);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Page layout: center chat with side padding */
+    .page {
+      min-height: 100vh;
+      box-sizing: border-box;
+      padding: 16px;
+    }
+
+    .chat-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 8px 0 24px 0;
+    }
+
+    /* Base message block */
+    .msg {
+      margin-bottom: 8px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      clear: both;
+    }
+
+    /* System messages: small, subtle, no bubble */
+    .msg-system {
+      background: transparent;
+      color: var(--color-system-text);
+      font-size: 0.8em;
+      margin: 4px 0;
+      padding: 0;
+      max-width: 100%;
+    }
+
+    .msg-system pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: transparent;
+      border-radius: 0;
+      padding: 0;
+    }
+
+    /* User messages: right-aligned bubble with dynamic width */
+    .msg-user {
+      background-color: var(--color-user-bubble-bg);
+      margin-left: auto;
+      margin-right: 0;
+      text-align: right;
+      max-width: 70%;
+      width: fit-content;
+      box-sizing: border-box;
+      padding: 6px 10px;
+      border-radius: 10px;
+      word-wrap: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    /* Assistant messages: transparent, full width content */
+    .msg-assistant {
+      background-color: transparent;
+      margin-right: auto;
+      margin-left: 0;
+      text-align: left;
+      max-width: 100%;
+      padding-left: 0;
+      padding-right: 0;
+      border-radius: 0;
+      word-wrap: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    /* Markdown content basics */
+    .msg-user p,
+    .msg-assistant p {
+      margin: 0.15em 0;
+    }
+
+    .msg-user ul,
+    .msg-user ol,
+    .msg-assistant ul,
+    .msg-assistant ol {
+      margin: 0.2em 0 0.2em 1.3em;
+      padding: 0;
+    }
+
+    .msg-user h1,
+    .msg-user h2,
+    .msg-user h3,
+    .msg-assistant h1,
+    .msg-assistant h2,
+    .msg-assistant h3 {
+      margin: 0.3em 0 0.2em 0;
+      font-size: 1.0em;
+      font-weight: 600;
+    }
+
+    /* Code and preformatted text */
+    pre, code {
+      font-family: "Fira Code", "JetBrains Mono", monospace;
+      background-color: var(--color-code-bg);
+    }
+
+    pre {
+      padding: 6px;
+      border-radius: 4px;
+      overflow-x: auto;
+      margin: 6px 0;
+      white-space: pre;
+    }
+
+    code {
+      padding: 1px 3px;
+      border-radius: 3px;
+    }
+
+    /* Tables */
+    table {
+      border-collapse: collapse;
+      margin: 4px 0;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    th, td {
+      border: 1px solid var(--color-table-border);
+      padding: 4px 6px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background-color: var(--color-table-header-bg);
+      font-weight: 600;
+    }
+
+    /* Blockquotes */
+    blockquote {
+      border-left: 3px solid var(--color-blockquote-border);
+      margin: 4px 0 4px 0;
+      padding-left: 8px;
+      color: #cccccc;
+    }
+
+    /* Collapsible blocks (web search, thoughts, etc.) */
+    details.web-results,
+    details.thoughts {
+      margin: 4px 0;
+      padding: 4px 6px;
+      border-radius: 6px;
+      background-color: rgba(255,255,255,0.02);
+    }
+
+    details.web-results summary,
+    details.thoughts summary {
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
+      outline: none;
+    }
+
+    details.web-results summary::-webkit-details-marker,
+    details.thoughts summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.web-results summary::before,
+    details.thoughts summary::before {
+      content: "▸";
+      display: inline-block;
+      margin-right: 4px;
+      transform-origin: center;
+      transition: transform 0.15s ease-out;
+      opacity: 0.8;
+    }
+
+    details.web-results[open] summary::before,
+    details.thoughts[open] summary::before {
+      transform: rotate(90deg);
+    }
+
+    details.web-results summary,
+    details.thoughts summary {
+      font-size: 0.9em;
+      color: var(--color-system-text);
+    }
+
+    details.web-results > div,
+    details.thoughts > div {
+      margin-top: 4px;
+    }
+
+    /* Remove ugly focus outline on summary */
+    details.web-results summary:focus,
+    details.thoughts summary:focus,
+    summary:focus {
+      outline: none;
+    }
+
+    /* Scrollbars (for WebEngine / Chromium) */
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--color-scrollbar-track);
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--color-scrollbar-thumb);
+      border-radius: 5px;
+      border: 2px solid var(--color-scrollbar-track);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: var(--color-scrollbar-thumb-hover);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="chat-wrapper">
+      {{CHAT_CONTENT}}
+    </div>
+  </div>
+</body>
+</html>

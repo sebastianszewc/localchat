@@ -1,0 +1,26 @@
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.sqlite3
+
+# Virtual envs
+venv/
+.env/
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Qt / PyQt build artifacts
+*.qrc.py
+*.ui.py
+
+# IDE
+.idea/
+.vscode/
+*.swp
